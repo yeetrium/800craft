@@ -289,6 +289,9 @@ namespace fCraft {
                 }
             }
 
+            tempEl = el.Element("MOTD");
+            if (tempEl != null) world.MOTD = tempEl.Value;
+
             foreach ( XElement mainedRankEl in el.Elements( RankMainXmlTagName ) ) {
                 Rank rank = Rank.Parse( mainedRankEl.Value );
                 if ( rank != null ) {

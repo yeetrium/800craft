@@ -139,7 +139,7 @@ namespace fCraft {
             }
             //check the title, is it a title?
             if ( titleName != null ) {
-                string StripT = Color.StripColors( titleName );
+                string StripT = Color.StripColors( titleName, false );
                 if ( !StripT.StartsWith( "[" ) && !StripT.EndsWith( "]" ) ) {
                     //notify player, confirm with /ok TODO
                     //titleName = info.Rank.Color + "[" + titleName + info.Rank.Color + "]";

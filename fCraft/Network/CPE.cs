@@ -30,11 +30,11 @@ namespace fCraft {
             writer.Write( Packet.MakeExtEntry( CustomBlocksExtName, CustomBlocksExtVersion ).Data );
             writer.Write( Packet.MakeExtEntry( BlockPermissionsExtName, BlockPermissionsExtVersion ).Data );
 
-            Logger.Log( LogType.SystemActivity, "Sent ExtInfo and entry packets" );
+            // Logger.Log( LogType.SystemActivity, "Sent ExtInfo and entry packets" );
 
             // Expect ExtInfo reply from the client
             OpCode extInfoReply = ( OpCode )reader.ReadByte();
-            Logger.Log( LogType.SystemActivity, "Expected: {0} / Received: {1}", OpCode.ExtInfo, extInfoReply );
+            // Logger.Log( LogType.SystemActivity, "Expected: {0} / Received: {1}", OpCode.ExtInfo, extInfoReply );
             if ( extInfoReply != OpCode.ExtInfo ) {
                 Logger.Log( LogType.Warning, "Player {0} from {1}: Unexpected ExtInfo reply ({2})", Name, IP, extInfoReply );
                 return false;
@@ -49,7 +49,7 @@ namespace fCraft {
             for ( int i = 0; i < expectedEntries; i++ ) {
                 // Expect ExtEntry replies (0 or more)
                 OpCode extEntryReply = ( OpCode )reader.ReadByte();
-                Logger.Log( LogType.SystemActivity, "Expected: {0} / Received: {1}", OpCode.ExtEntry, extEntryReply );
+                // Logger.Log( LogType.SystemActivity, "Expected: {0} / Received: {1}", OpCode.ExtEntry, extEntryReply );
                 if ( extEntryReply != OpCode.ExtEntry ) {
                     Logger.Log( LogType.Warning, "Player {0} from {1}: Unexpected ExtEntry reply ({2})", Name, IP, extEntryReply );
                     return false;
@@ -84,7 +84,7 @@ namespace fCraft {
 
                 // Expect CustomBlockSupportLevel reply
                 OpCode customBlockSupportLevelReply = ( OpCode )reader.ReadByte();
-                Logger.Log( LogType.SystemActivity, "Expected: {0} / Received: {1}", OpCode.CustomBlocks, customBlockSupportLevelReply );
+                // Logger.Log( LogType.SystemActivity, "Expected: {0} / Received: {1}", OpCode.CustomBlocks, customBlockSupportLevelReply );
                 if ( customBlockSupportLevelReply != OpCode.CustomBlocks ) {
                     Logger.Log( LogType.Warning, "Player {0} from {1}: Unexpected CustomBlockSupportLevel reply ({2})",
                                        Name,
@@ -122,7 +122,7 @@ namespace fCraft {
         [Pure]
         public static Packet MakeExtInfo( short extCount ) {
             String VersionString = "800Craft " + Updater.CurrentRelease.VersionString;
-            Logger.Log( LogType.SystemActivity, "Send: ExtInfo({0},{1})", VersionString, extCount );
+            // Logger.Log( LogType.SystemActivity, "Send: ExtInfo({0},{1})", VersionString, extCount );
 
             Packet packet = new Packet( OpCode.ExtInfo );
             Encoding.ASCII.GetBytes( VersionString.PadRight( 64 ), 0, 64, packet.Data, 1 );
@@ -132,7 +132,7 @@ namespace fCraft {
 
         [Pure]
         public static Packet MakeExtEntry( string name, int version ) {
-            Logger.Log( LogType.SystemActivity, "Send: ExtEntry({0},{1})", name, version );
+            // Logger.Log( LogType.SystemActivity, "Send: ExtEntry({0},{1})", name, version );
             Packet packet = new Packet( OpCode.ExtEntry );
             Encoding.ASCII.GetBytes( name.PadRight( 64 ), 0, 64, packet.Data, 1 );
             ToNetOrder( version, packet.Data, 65 );
@@ -160,7 +160,7 @@ namespace fCraft {
 
         [Pure]
         public static Packet MakeCustomBlockSupportLevel( byte level ) {
-            Logger.Log( LogType.SystemActivity, "Send: CustomBlockSupportLevel({0})", level );
+            // Logger.Log( LogType.SystemActivity, "Send: CustomBlockSupportLevel({0})", level );
             Packet packet = new Packet( OpCode.CustomBlocks );
             packet.Data[1] = level;
             return packet;

@@ -45,7 +45,7 @@ namespace fCraft {
             //CommandManager.RegisterCommand(CdFeed);
             //CommandManager.RegisterCommand(CdBot);
             //CommandManager.RegisterCommand(CdSpell);
-            //CommandManager.RegisterCommand(CdGame);
+            CommandManager.RegisterCommand(CdGame);
         }
 
         private static readonly CommandDescriptor CdGame = new CommandDescriptor {
@@ -53,7 +53,8 @@ namespace fCraft {
             Category = CommandCategory.World,
             Permissions = new Permission[] { Permission.Games },
             IsConsoleSafe = false,
-            Usage = "/Unfinished command.",
+            Help = "Creates a game mode. Games available are zombie and minefield. Options are start and stop. Zombie has no stop option.",
+            Usage = "/Game [game] [option]",
             Handler = GameHandler
         };
 
@@ -61,10 +62,18 @@ namespace fCraft {
             string GameMode = cmd.Next();
             string Option = cmd.Next();
             World world = player.World;
-            /*if (world == WorldManager.MainWorld){
+            if (world == WorldManager.MainWorld){
                 player.Message("/Game cannot be used on the main world");
                 return;
-            }*/
+            }
+
+            // Check arguments
+            if (GameMode == null || Option == null)
+            {
+                CdGame.PrintUsage(player);
+                player.Message("See &H/Help game&S for a list of games available.");
+                return;
+            }
 
             if ( GameMode.ToLower() == "zombie" ) {
                 if ( Option.ToLower() == "start" ) {

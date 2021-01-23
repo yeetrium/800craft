@@ -39,6 +39,9 @@ namespace fCraft {
         Fun = 256,
 
         /// <summary> Commands that use advanced mathematics. </summary>
-        Math = 512
+        Math = 512,
+
+        /// <summary> Commands that are only used for diagnostics and debugging. </summary>
+        New = 1024
     }
 }

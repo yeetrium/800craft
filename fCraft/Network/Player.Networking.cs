@@ -991,7 +991,7 @@ namespace fCraft {
                                                      "Use Player.JoinWorld instead." );
             }
 
-            string textLine1 = ConfigKey.ServerName.GetString();
+            string textLine1 = ConfigKey.ServerName.GetString() + " &fis loading " + newWorld.ClassyName + "&f...";
             string textLine2;
 
             if ( IsUsingWoM && ConfigKey.WoMEnableEnvExtensions.Enabled() ) {
@@ -1001,7 +1001,7 @@ namespace fCraft {
                     textLine2 = "cfg=" + Server.ExternalIP + ":" + Server.Port + "/" + newWorld.Name;
                 }
             } else {
-                textLine2 = "Loading world " + newWorld.ClassyName;
+                textLine2 = newWorld.MOTD ?? "&aThanks for joining!";
             }
 
             if ( RaisePlayerJoiningWorldEvent( this, newWorld, reason, textLine1, textLine2 ) ) {

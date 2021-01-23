@@ -64,6 +64,8 @@ namespace fCraft {
 
         public string Greeting = null;
 
+        public string MOTD = null;
+
         /// <summary> Whether this world is currently pending unload
         /// (waiting for block updates to finish processing before unloading). </summary>
         public bool IsPendingMapUnload { get; private set; }

@@ -56,12 +56,12 @@ namespace fCraft.Drawing {
 
             // if string starts with "++", load image from imgur
             if( urlString.StartsWith( "++" ) ) {
-                urlString = "http://i.imgur.com/" + urlString.Substring( 2 );
+                urlString = "https://i.imgur.com/" + urlString.Substring( 2 );
             }
 
-            // prepend the protocol, if needed (assume http)
-            if( !urlString.StartsWith( "http://", StringComparison.OrdinalIgnoreCase ) ) {
-                urlString = "http://" + urlString;
+            // prepend the protocol, if needed (assume https)
+            if( !urlString.StartsWith( "https://", StringComparison.OrdinalIgnoreCase ) ) {
+                urlString = "https://" + urlString;
             }
 
             // validate the image URL
@@ -115,6 +115,8 @@ namespace fCraft.Drawing {
 
             // Download the image
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create( ImageUrl );
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
             request.Timeout = (int)DownloadTimeout.TotalMilliseconds;
             request.ServicePoint.BindIPEndPointDelegate = Server.BindIPEndPointCallback;
             request.UserAgent = Updater.UserAgent;

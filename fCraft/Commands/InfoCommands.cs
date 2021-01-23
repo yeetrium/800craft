@@ -90,9 +90,9 @@ namespace fCraft {
                 CdWhoIs.PrintUsage( player );
                 return;
             }
-            Name = Color.StripColors( Name.ToLower() );
+            Name = Color.StripColors( Name.ToLower(), false );
             PlayerInfo[] Names = PlayerDB.PlayerInfoList.Where( p => p.DisplayedName != null &&
-                Color.StripColors( p.DisplayedName.ToLower() ).Contains( Name ) )
+                Color.StripColors( p.DisplayedName.ToLower(), false ).Contains( Name ) )
                                          .ToArray();
             Array.Sort( Names, new PlayerInfoComparer( player ) );
             if ( Names.Length < 1 ) {

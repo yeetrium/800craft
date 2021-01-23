@@ -245,7 +245,7 @@ namespace fCraft.ServerGUI {
                                     totalTime.TotalHours,
                                     totalTime.TotalMinutes );
                 }
-                textBox1.Text = Color.StripColors( textBox1.Text );
+                textBox1.Text = Color.StripColors( textBox1.Text, true );
             }
         }
 

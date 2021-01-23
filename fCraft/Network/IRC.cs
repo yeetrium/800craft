@@ -618,12 +618,12 @@ namespace fCraft {
                 message = Chat.ReplaceUncodeWithEmotes( message );
                 message = Chat.ReplaceEmoteKeywords( message );
                 // strips minecraft colors and newlines
-                message = Color.StripColors( message );
+                message = Color.StripColors( message, false );
             } else {
                 // strips emotes
                 message = IRCColorsAndNonStandardChars.Replace( message, "" );
                 // strips minecraft colors and newlines
-                message = Color.StripColors( message );
+                message = Color.StripColors( message, false );
             }
 
             message = Chat.UnescapeBackslashes( message );
@@ -653,7 +653,7 @@ namespace fCraft {
                 message = message.Replace( "&N", "\n" );
                 message = message.Replace( BoldCode, "" );
                 message = message.Replace( ResetCode, "" );
-                message = Color.StripColors( message );
+                message = Color.StripColors( message, false );
             }
             return message.Trim();
         }

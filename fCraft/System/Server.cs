@@ -29,6 +29,9 @@ namespace fCraft {
         /// <summary> Time when the server started (UTC). Used to check uptime. </summary>
         public static DateTime StartTime { get; private set; }
 
+        /// <summary> Software name that shows up on the server list on classicube.</summary>
+        public static string Software = "&1800&4Craft%20&7v0%2E307%20&aVIP";
+
         internal static int MaxUploadSpeed,   // set by Config.ApplyConfig
                             BlockUpdateThrottling; // used when there are no players in a world
 

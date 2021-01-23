@@ -26,7 +26,7 @@ namespace fCraft {
         public static string Salt { get; internal set; }
 
         static Heartbeat() {
-            MinecraftNetUri = new Uri( "https://minecraft.net/heartbeat.jsp" );
+            MinecraftNetUri = new Uri("http://www.classicube.net/server/heartbeat/");
             Delay = TimeSpan.FromSeconds( 25 );
             Timeout = TimeSpan.FromSeconds( 10 );
             Salt = Server.GetRandomString( 32 );
@@ -49,7 +49,6 @@ namespace fCraft {
 
             if ( ConfigKey.HeartbeatEnabled.Enabled() ) {
                 SendMinecraftNetBeat();
-                Send800CraftNetBeat();
                 HbSave();
             } else {
                 // If heartbeats are disabled, the server data is written
@@ -79,49 +78,6 @@ namespace fCraft {
             minecraftNetRequest = CreateRequest( data.CreateUri() );
             var state = new HeartbeatRequestState( minecraftNetRequest, data, true );
             minecraftNetRequest.BeginGetResponse( ResponseCallback, state );
-        }
-
-        private static void Send800CraftNetBeat() {
-            if ( Server.Uri == null )
-                return;
-            string uri = "http://800craft.webuda.com/Heartbeat.php";
-            // create a request
-            try {
-                HttpWebRequest request = ( HttpWebRequest )WebRequest.Create( uri );
-                request.Timeout = 3000;
-                request.Method = "POST";
-
-                // turn request string into a byte stream
-                byte[] postBytes = Encoding.ASCII.GetBytes( string.Format( "ServerName={0}&Url={1}&Players={2}&MaxPlayers={3}&Uptime={4}",
-                                 Uri.EscapeDataString( ConfigKey.ServerName.GetString() ),
-                                 Server.Uri,
-                                 Server.Players.Length,
-                                 ConfigKey.MaxPlayers.GetInt(),
-                                 DateTime.UtcNow.Subtract( Server.StartTime ).TotalMinutes ) );
-
-                request.ContentType = "application/x-www-form-urlencoded";
-                request.CachePolicy = new System.Net.Cache.RequestCachePolicy( System.Net.Cache.RequestCacheLevel.NoCacheNoStore );
-                request.ContentLength = postBytes.Length;
-                request.Timeout = 3000;
-                Stream requestStream = request.GetRequestStream();
-
-                // send it
-                requestStream.Write( postBytes, 0, postBytes.Length );
-                requestStream.Flush();
-                requestStream.Close();
-                /* try
-                 {
-                    HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                    Logger.LogToConsole(new StreamReader(response.GetResponseStream()).ReadToEnd());
-                    Logger.LogToConsole(response.StatusCode + "\n");
-                 }
-                 catch (Exception ex)
-                 {
-                     Logger.LogToConsole("" + ex);
-                 }*/
-            } catch ( Exception ) {
-                //do nothing, server is probably down and host doesnt care
-            }
         }
 
         // Creates an asynchrnous HTTP request to the given URL
@@ -298,14 +254,15 @@ namespace fCraft {
         public Uri CreateUri() {
             UriBuilder ub = new UriBuilder( HeartbeatUri );
             StringBuilder sb = new StringBuilder();
-            sb.AppendFormat( "public={0}&max={1}&users={2}&port={3}&version={4}&salt={5}&name={6}",
+            sb.AppendFormat( "public={0}&max={1}&users={2}&port={3}&version={4}&salt={5}&name={6}&software={7}",
                              IsPublic,
                              MaxPlayers,
                              PlayerCount,
                              Port,
                              ProtocolVersion,
                              Uri.EscapeDataString( Salt ),
-                             Uri.EscapeDataString( ServerName ) );
+                             Uri.EscapeDataString( ServerName ),
+                             Server.Software.Replace( "&", "%26" ) );
             foreach ( var pair in CustomData ) {
                 sb.AppendFormat( "&{0}={1}",
                                  Uri.EscapeDataString( pair.Key ),
