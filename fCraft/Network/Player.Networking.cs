@@ -490,6 +490,10 @@ namespace fCraft {
                     GentlyKickBetaClients();
                     return false;
 
+                case 49:
+                    KickNow("Incompatible client, or a network error.", LeaveReason.ProtocolViolation);
+                    return false;
+
                 case 250:
                     GentlyKickBetaClients();
                     return false;
