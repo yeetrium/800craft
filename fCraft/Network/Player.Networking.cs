@@ -428,7 +428,7 @@ namespace fCraft {
 
             // if a player is using InDev or SurvivalTest client, they may try to
             // place blocks that are not found in MC Classic. Convert them!
-            if ( type > 49 ) {
+            if ( type > (byte)Block.StoneBrick ) {
                 type = MapDat.MapBlock( type );
             }
 

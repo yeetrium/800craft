@@ -195,6 +195,7 @@ namespace fCraft {
             if ( !Physics.CanFloat( e.NewBlock )
                 && e.NewBlock != Block.Air
                 && e.NewBlock != Block.Water
+                && e.NewBlock != Block.Fire
                 && e.NewBlock != Block.Lava
                 && e.NewBlock != Block.BrownMushroom
                 && e.NewBlock != Block.RedFlower
@@ -243,20 +244,28 @@ namespace fCraft {
                 case Block.Yellow:
                 case Block.Lime:
                 case Block.Green:
+                case Block.DarkGreen:
                 case Block.Teal:
                 case Block.Aqua:
                 case Block.Cyan:
                 case Block.Blue:
+                case Block.DarkBlue:
                 case Block.Indigo:
+                case Block.Turquoise:
                 case Block.Violet:
                 case Block.Magenta:
                 case Block.Pink:
+                case Block.LightPink:
                 case Block.Black:
+                case Block.Brown:
                 case Block.Gray:
                 case Block.White:
                 case Block.Sponge:
                 case Block.Wood:
+                case Block.Crate:
                 case Block.Leaves:
+                case Block.Rope:
+                case Block.Ice:
                     return true;
                 default:
                     return false;

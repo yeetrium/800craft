@@ -320,7 +320,9 @@ namespace RandomMaze {
 
         private Block[] _randomBlocks = {Block.White, Block.Blue, Block.Gold, Block.Cyan, Block.Green,
 											Block.Indigo, Block.Magenta, Block.Obsidian, Block.Orange,
-											Block.Pink,Block.Red, Block.Sponge, Block.Violet, Block.Yellow};
+											Block.Pink, Block.Red, Block.Sponge, Block.Violet, Block.Yellow,
+                                            Block.LightPink, Block.DarkGreen, Block.Brown, Block.DarkBlue,
+                                            Block.Turquoise};
 
         private const Block HintBlock = Block.Log;
 

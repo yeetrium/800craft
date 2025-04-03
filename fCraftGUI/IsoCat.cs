@@ -293,7 +293,7 @@ namespace fCraft.GUI {
 
         private void BlendTile() {
             int pos = ( x + ( Rot == 1 || Rot == 3 ? offsetY : offsetX ) ) * isoX + ( y + ( Rot == 1 || Rot == 3 ? offsetX : offsetY ) ) * isoY + z * isoH + isoOffset;
-            if ( block > 49 )
+            if ( block > (byte)Block.StoneBrick )
                 return;
             int tileOffset = block * TileStride;
             BlendPixel( pos, tileOffset );

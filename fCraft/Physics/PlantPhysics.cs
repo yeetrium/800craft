@@ -138,6 +138,8 @@ namespace fCraft {
                 case Block.BrownMushroom:
                 case Block.RedMushroom:
                 case Block.Plant:
+                case Block.Rope:
+                case Block.Fire:
                     return false;
                 default:
                     return true;

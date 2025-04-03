@@ -484,7 +484,7 @@ namespace fCraft {
             bool mapped = false;
             fixed ( byte* ptr = Blocks ) {
                 for ( int j = 0; j < Blocks.Length; j++ ) {
-                    if ( ptr[j] > 49 ) {
+                    if ( ptr[j] > (byte)Block.StoneBrick ) {
                         ptr[j] = mapping[ptr[j]];
                         mapped = true;
                     }
@@ -674,6 +674,41 @@ namespace fCraft {
             BlockNames["blockthathasgreypixelsonitmostlybutsomeareactuallygreen"] = Block.MossyRocks;
 
             BlockNames["onyx"] = Block.Obsidian;
+
+            BlockNames["cstep"] = Block.CobbleSlab;
+            BlockNames["rock_slab"] = Block.CobbleSlab;
+            BlockNames["rock_step"] = Block.CobbleSlab;
+            BlockNames["cobblestone_slab"] = Block.CobbleSlab;
+
+            BlockNames["string"] = Block.Rope;
+
+            BlockNames["ystone"] = Block.Sandstone;
+
+            BlockNames["nieve"] = Block.Snow;
+
+            BlockNames["f"] = Block.Fire;
+            BlockNames["hot"] = Block.Fire;
+            BlockNames["burn"] = Block.Fire;
+            BlockNames["fuego"] = Block.Fire;
+
+            BlockNames["lpink"] = Block.LightPink;
+            BlockNames["light_pink"] = Block.LightPink;
+
+            BlockNames["dark_green"] = Block.DarkGreen;
+            BlockNames["forest_green"] = Block.DarkGreen;
+
+            BlockNames["dark_blue"] = Block.DarkBlue;
+            BlockNames["deep_blue"] = Block.DarkBlue;
+
+            BlockNames["i"] = Block.Ice;
+            BlockNames["freeze"] = Block.Ice;
+
+            BlockNames["ceramictile"] = Block.Tile;
+            BlockNames["ceramic_tile"] = Block.Tile;
+
+            BlockNames["box"] = Block.Crate;
+
+            BlockNames["stone_brick"] = Block.StoneBrick;
 
             // add WoM file hashes for edge textures
             BlockEdgeTextures[Block.Air] = "bed8ac09b8c761527f3e205f8b85a2e22519b937";
